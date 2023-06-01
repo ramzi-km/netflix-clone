@@ -66,7 +66,7 @@ export class MovieDetailsComponent implements OnInit {
   getVideo(id: any) {
     this.service.getMovieVideo(id).subscribe((result) => {
       result.results.forEach((element: any) => {
-        if (element.type == 'Trailer' && element.name == 'Official Trailer') {
+        if (element.type == 'Trailer') {
           this.getMovieVideoResult = element.key;
         }
       });

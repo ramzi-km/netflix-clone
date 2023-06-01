@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiServiceService } from '../../../services/movie-api-service.service';
 
@@ -13,11 +13,13 @@ export class MovieDetailsComponent implements OnInit {
     private service: MovieApiServiceService,
     private router: ActivatedRoute,
     private title: Title,
-    private meta: Meta
+    private meta: Meta,
+    public sanitizer: DomSanitizer
   ) {}
   getMovieDetailResult: any;
   getMovieVideoResult: any;
   getMovieCastResult: any;
+  src: string = '';
   ngOnInit(): void {
     let getParamId = this.router.snapshot.paramMap.get('id');
 
@@ -68,6 +70,7 @@ export class MovieDetailsComponent implements OnInit {
           this.getMovieVideoResult = element.key;
         }
       });
+      this.src = `https://www.youtube.com/embed/${this.getMovieVideoResult}`;
     });
   }
 
